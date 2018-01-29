@@ -40,9 +40,20 @@ public class CharacterControl : MonoBehaviour
             characterController.SimpleMove(transform.TransformDirection(Vector3.forward * speed));
 
             animator.SetBool("Walking", true);
+            animator.SetBool("BackWalking", false);
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            float speed = 1.0f;
+            
+            characterController.SimpleMove(transform.TransformDirection(Vector3.back * speed));
+
+            animator.SetBool("Walking", false);
+            animator.SetBool("BackWalking", true);
         }
         else
         {
+            animator.SetBool("BackWalking", false);
             animator.SetBool("Walking", false);
             animator.SetBool("Running", false);
         }

@@ -34,15 +34,6 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    void Start()
-    {
-        if (GameObject.FindGameObjectWithTag("Player") != null)
-        {
-            characterControl = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterControl>();
-            cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraControl>();
-        }
-    }
-
     public void InitGame(Player player)
     {
         currentPlayer = player;
@@ -53,7 +44,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if(isPlaying)
+        if (isPlaying)
         {
             currentPlayer.setTime(currentPlayer.getTime() + Time.deltaTime);
 
@@ -64,19 +55,44 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        if (isPlaying == false)
+        {
+            return;
+        }
+
+        characterControl = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterControl>();
+        cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraControl>();
+
         characterControl.Die();
         cameraControl.CameraGameOver();
 
         isPlaying = false;
+
+        LeaderBoardUI.instance.printGameOver(true);
+
+        SoundManager.instance.StopBackgroundMusic();
+        SoundManager.instance.PlayGameOverSound();
     }
 
     public void GameClear()
     {
+        if (isPlaying == false)
+        {
+            return;
+        }
+
+        characterControl = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterControl>();
+        cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraControl>();
+
         characterControl.Win();
         cameraControl.CameraGameClear();
 
         isPlaying = false;
 
         LeaderBoard.instance.addPlayer(currentPlayer);
+        LeaderBoardUI.instance.printGameOver(false);
+
+        SoundManager.instance.StopBackgroundMusic();
+        SoundManager.instance.PlayGameClearSound();
     }
 }

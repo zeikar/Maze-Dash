@@ -46,5 +46,7 @@ public class LeaderBoard : MonoBehaviour
         playerList.Add(player);
 
         playerList.Sort(delegate (Player c1, Player c2) { return c1.getTime().CompareTo(c2.getTime()); });
+
+        LeaderBoardUI.instance.printLeaderBoard(playerList);
     }
 }

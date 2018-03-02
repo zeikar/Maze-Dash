@@ -47,8 +47,6 @@ public class GameManager : MonoBehaviour
         if (isPlaying)
         {
             currentPlayer.setTime(currentPlayer.getTime() + Time.deltaTime);
-
-            Debug.Log(currentPlayer.getName() + currentPlayer.getTime());
         }
 
     }

@@ -60,11 +60,11 @@ public class CharacterControl : MonoBehaviour
 
         if(Input.GetKey(KeyCode.A))
         {
-            transform.Rotate(0.0f, -3.0f, 0.0f);
+            transform.Rotate(0.0f, -3.5f, 0.0f);
         }
         else if(Input.GetKey(KeyCode.D))
         {
-            transform.Rotate(0.0f, 3.0f, 0.0f);
+            transform.Rotate(0.0f, 3.5f, 0.0f);
         }
     }
 

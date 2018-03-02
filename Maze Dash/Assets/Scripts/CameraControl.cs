@@ -19,7 +19,7 @@ public class CameraControl : MonoBehaviour
     void Update()
     {
         Vector3 pos = player.position;
-        Vector3 offset = player.TransformDirection(new Vector3(0.0f, 1.0f, -1.0f));
+        Vector3 offset = player.TransformDirection(new Vector3(0.0f, 0.0f, 0.0f));
         RaycastHit hit;
 
         if (Physics.Raycast(player.position, offset, out hit, offset.sqrMagnitude))
@@ -32,8 +32,7 @@ public class CameraControl : MonoBehaviour
         }
 
 
-        //transform.rotation = Quaternion.Lerp(transform.rotation, player.rotation, 0.1f);
-        transform.LookAt(player);
+        transform.rotation = Quaternion.Lerp(transform.rotation, player.rotation, 0.1f);
     }
 
     public void CameraGameOver()
